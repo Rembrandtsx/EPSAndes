@@ -1,6 +1,29 @@
 const express = require('express');
 const router = new express.Router();
 const EPS = require('../controllers/EPS.js');
+const IPS = require('../controllers/IPS.js');
+const Contrata = require('../controllers/Contrata.js');
+const Usuario = require('../controllers/Usuario.js');
+const Gerente = require('../controllers/Gerente.js');
+const Administrador = require('../controllers/Administrador.js');
+const Recepcionista = require('../controllers/Recepcionista.js');
+const Afiliado = require('../controllers/Afiliado.js');
+const Medico = require('../controllers/Medico.js');
+const ServicioSalud = require('../controllers/ServicioSalud.js');
+const EpsServicios = require('../controllers/EpsServicios.js');
+const ServiciosOfrecidos = require('../controllers/ServiciosOfrecidos.js');
+const Consulta = require('../controllers/Consulta.js');
+const Terapias = require('../controllers/Terapias.js');
+const ConsultaUrgencias = require('../controllers/ConsultaUrgencias.js');
+const ExamenDiagnostico = require('../controllers/ExamenDiagnostico.js');
+const ProcedimientoEspecializado = require('../controllers/ProcedimientoEspecializado.js');
+const Hozpitalizado = require('../controllers/Hozpitalizado.js');
+const Cita = require('../controllers/Cita.js');
+const Control = require('../controllers/Control.js');
+const Orden = require('../controllers/Orden.js');
+const Recetas = require('../controllers/Recetas.js');
+const Medicamento = require('../controllers/Medicamento.js');
+const MedicamentoReceta = require('../controllers/MedicamentoReceta.js');
 //EPS
 router.route('/EPS/:id?')
     .get(EPS.get)
@@ -20,11 +43,11 @@ router.route('/Contrata/:id?')
     .put(Contrata.put)
     .delete(Contrata.delete)
 //Usuario
-router.route('/Usuarios/:id?')
-    .get(Usuarios.get)
-    .post(Usuarios.post)
-    .put(Usuarios.put)
-    .delete(Usuarios.delete)
+router.route('/Usuario/:id?')
+    .get(Usuario.get)
+    .post(Usuario.post)
+    .put(Usuario.put)
+    .delete(Usuario.delete)
 //Gerente
 router.route('/Gerente/:id?')
     .get(Gerente.get)
