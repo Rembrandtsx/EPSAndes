@@ -23,3 +23,6 @@ async function get(req, res, next) {
 }
  
 module.exports.get = get;
+module.exports.post = get;
+module.exports.put = get;
+module.exports.delete = get;
