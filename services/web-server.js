@@ -3,6 +3,7 @@ const express = require('express');
 const webServerConfig = require('../configs/web-server.js');
 const morgan = require('morgan');
 const database = require('./database.js');
+const router = require('./router.js');
 
 let httpServer;
  
@@ -18,6 +19,8 @@ function initialize() {
    
         res.end(`DB user: ${user}\nDate: ${date}`);
       });
+
+    app.use('/api', router);
  
     httpServer.listen(webServerConfig.port)
       .on('listening', () => {
