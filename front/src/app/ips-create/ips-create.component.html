@@ -1,0 +1,27 @@
+<h1>Crear IPS</h1>
+<form (ngSubmit)="crearIPS()" #IPSForm="ngForm">
+
+
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control" id="nombre"
+           required
+           [(ngModel)]="ips.nombre" name="nombre"
+           #name="ngModel">
+
+  </div>
+
+  <div class="form-group">
+    <label for="name">localizacion</label>
+    <input type="text" class="form-control" id="localizacion"
+           required
+           [(ngModel)]="ips.localizacion" name="localizacion"
+           #name="ngModel">
+
+  </div>
+
+
+
+  <button type="submit" class="btn btn-success" [disabled]="!IPSForm.form.valid">Submit</button>
+
+</form>

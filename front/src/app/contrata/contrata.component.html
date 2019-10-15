@@ -1,0 +1,28 @@
+<h1>Crear Contratacion de EPS a IPS</h1>
+<form (ngSubmit)="crearContrata()" #contrataForm="ngForm">
+
+  <div class="form-group">
+    <label for="power">Eps Contratante</label>
+    <select class="form-control" id="eps"
+            required
+            [(ngModel)]="contrata.idEPS" name="eps"
+            #power="ngModel">
+      <option *ngFor="let eps of epss" [value]="eps.ID">{{eps.NOMBRE}}</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="power">IPS Contratada</label>
+    <select class="form-control" id="ips"
+            required
+            [(ngModel)]="contrata.idIPS" name="ips"
+            #power="ngModel">
+      <option *ngFor="let ips of ipss" [value]="ips.ID">{{ips.NOMBRE}}</option>
+    </select>
+
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!contrataForm.form.valid">Crear</button>
+
+</form>

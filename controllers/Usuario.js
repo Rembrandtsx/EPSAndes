@@ -4,8 +4,9 @@ async function get(req, res, next) {
   try {
     const context = {};
  
-    context.id = parseInt(req.params.id, 10);
- 
+    
+    context.userName = req.params.userName;
+
     const rows = await Usuario.find(context);
  
     if (req.params.id) {
@@ -21,8 +22,38 @@ async function get(req, res, next) {
     next(err);
   }
 }
- 
+
+
 module.exports.get = get;
-module.exports.post = get;
+
+
+function getEPSFromRec(req) {
+  console.log( req.body);  
+  const eps = {
+    userName: req.body.userName,
+    nombre: req.body.nombre,
+    password: req.body.password,
+    tipo: req.body.tipo
+  };
+ 
+  return eps;
+}
+ 
+async function post(req, res, next) {
+  try {
+    let eps = getEPSFromRec(req);
+    
+    eps = await Usuario.create(eps);
+    console.log(eps);
+    
+    res.status(201).json(eps);
+  } catch (err) {
+    next(err);
+  }
+}
+ 
+module.exports.post = post;
+
+
 module.exports.put = get;
 module.exports.delete = get;

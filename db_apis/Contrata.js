@@ -8,11 +8,6 @@ async function find(context) {
   let query = baseQuery;
   const binds = {};
  
-  if (context.id) {
-    binds.id = context.id;
- 
-    query += `\n WHERE id = :id`;
-  }
  
   const result = await database.simpleExecute(query, binds);
  
@@ -20,3 +15,22 @@ async function find(context) {
 }
  
 module.exports.find = find;
+
+const createSQL =
+ `insert into Contrata(
+    idEPS,
+    idIPS
+  ) values (
+    :idEPS,
+    :idIPS
+  )`;
+
+async function create(emp) {
+  const eps = Object.assign({}, emp);
+ 
+  const result = await database.simpleExecute(createSQL, eps);
+  console.log(result);  
+  return eps;
+}
+ 
+module.exports.create = create;

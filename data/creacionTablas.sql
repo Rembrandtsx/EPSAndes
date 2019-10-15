@@ -1,8 +1,12 @@
+CREATE SEQUENCE EPSANDES_SEQUENCE;
+
 CREATE TABLE EPS
 (
     id int NOT NULL PRIMARY KEY,
     nombre varchar(255) NOT NULL,
-    localizacion varchar(255) NOT NULL
+    localizacion varchar(255) NOT NULL,
+    idGerente varchar(255) NOT NULL,
+    CONSTRAINT EPS_Gerente FOREIGN KEY (idGerente) REFERENCES Usuario(userName)
 );
 
 CREATE TABLE IPS
@@ -25,55 +29,13 @@ CREATE TABLE Usuario
 (
   userName varchar(255) NOT NULL PRIMARY KEY,
   nombre varchar(255) NOT NULL,
-  password varchar(255) NOT NULL
+  password varchar(255) NOT NULL,
+  tipo varchar(255) NOT NULL CHECK('medico', 'recepcionista', 'afiliado', 'administrador','gerente')
+  
 );
-
-CREATE TABLE Gerente
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  CONSTRAINT Usuario_FK FOREIGN KEY (userName) REFERENCES Usuario(userName),
-  idTrabajo int NOT NULL,
-  idEPS int NOT NULL,
-  CONSTRAINT Usuario_GERENTE_FK FOREIGN KEY (idEPS) REFERENCES EPS(id),
-);
-
-CREATE TABLE Administrador
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  idEPS int NOT NULL ,
-  CONSTRAINT Usuario_GERENTE_FK FOREIGN KEY (userName) REFERENCES Usuario(userName),
-  CONSTRAINT IPS_GERENTE_FK FOREIGN KEY (idEPS) REFERENCES EPS(id)
-
-);
-
-CREATE TABLE Recepcionista
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  idTrabajo int NOT NULL,
-  idEPS int NOT NULL,
-  CONSTRAINT Usuario_RECEPCIONISTA_FK FOREIGN KEY (userName) REFERENCES Usuario(userName),
-  CONSTRAINT IPS_RECEPCIONISTA_FK FOREIGN KEY (idEPS) REFERENCES EPS(id)
-
-);
-
-CREATE TABLE Afiliado
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  idAfiliado int NOT NULL,
-  idEPS int NOT NULL,
-  CONSTRAINT Usuario_AFILIADO_FK FOREIGN KEY (userName) REFERENCES Usuario(userName),
-  CONSTRAINT EPS_AFILIADO_FK FOREIGN KEY (idEPS) REFERENCES EPS(id)
-
-);
-
-CREATE TABLE Medico
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  idAfiliado int NOT NULL,
-  idEPS int NOT NULL,
-  CONSTRAINT Usuario_MEDICO_FK FOREIGN KEY (userName) REFERENCES Usuario(userName),
-  CONSTRAINT EPS_MEDICO_FK FOREIGN KEY (idEPS) REFERENCES EPS(id)
-);
+ALTER TABLE Usuario
+ADD CONSTRAINT check_user_type
+  CHECK (tipo IN ('medico', 'recepcionista', 'afiliado', 'administrador','gerente'))
 
 CREATE TABLE ServiciosSalud
 (
@@ -223,3 +185,6 @@ CREATE TABLE MedicamentoReceta
   CONSTRAINT Medicamento_MR_FK FOREIGN KEY (idMedicamento) REFERENCES Medicamento(idMedicamento),
   CONSTRAINT Reseta_MR_FK FOREIGN KEY (idReceta) REFERENCES Recetas(id)
 );
+
+
+

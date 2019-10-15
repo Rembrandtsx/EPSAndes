@@ -4,7 +4,7 @@ async function get(req, res, next) {
   try {
     const context = {};
  
-    context.id = parseInt(req.params.id, 10);
+    
  
     const rows = await Contrata.find(context);
  
@@ -23,6 +23,34 @@ async function get(req, res, next) {
 }
  
 module.exports.get = get;
-module.exports.post = get;
+
+
+function getContrataFromRec(req) {
+  console.log( req.body);  
+  const contrata = {
+    idEPS: req.body.idEPS,
+    idIPS: req.body.idIPS
+  };
+ 
+  return contrata;
+}
+ 
+async function post(req, res, next) {
+  try {
+    let contrata = getContrataFromRec(req);
+    
+    contrata = await Contrata.create(contrata);
+    console.log(contrata);
+    
+    res.status(201).json(contrata);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports.post = post;
+
+
+
 module.exports.put = get;
 module.exports.delete = get;

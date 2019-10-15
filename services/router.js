@@ -1,14 +1,14 @@
 const express = require('express');
 const router = new express.Router();
+
+
+/*
+    Objetos
+*/
 const EPS = require('../controllers/EPS.js');
 const IPS = require('../controllers/IPS.js');
 const Contrata = require('../controllers/Contrata.js');
 const Usuario = require('../controllers/Usuario.js');
-const Gerente = require('../controllers/Gerente.js');
-const Administrador = require('../controllers/Administrador.js');
-const Recepcionista = require('../controllers/Recepcionista.js');
-const Afiliado = require('../controllers/Afiliado.js');
-const Medico = require('../controllers/Medico.js');
 const ServicioSalud = require('../controllers/ServicioSalud.js');
 const EpsServicios = require('../controllers/EpsServicios.js');
 const ServiciosOfrecidos = require('../controllers/ServiciosOfrecidos.js');
@@ -24,6 +24,18 @@ const Orden = require('../controllers/Orden.js');
 const Recetas = require('../controllers/Recetas.js');
 const Medicamento = require('../controllers/Medicamento.js');
 const MedicamentoReceta = require('../controllers/MedicamentoReceta.js');
+/**
+    Objetos de consulta y preparación
+ */
+const utilities = require('../controllers/utils.js');
+/**************
+ *  
+ **************/
+
+ router.route('/utils')
+    .get(utilities.get)
+    .post(utilities.post);
+
 //EPS
 router.route('/EPS/:id?')
     .get(EPS.get)
@@ -43,41 +55,11 @@ router.route('/Contrata/:id?')
     .put(Contrata.put)
     .delete(Contrata.delete)
 //Usuario
-router.route('/Usuario/:id?')
+router.route('/Usuario/:userName?')
     .get(Usuario.get)
     .post(Usuario.post)
     .put(Usuario.put)
     .delete(Usuario.delete)
-//Gerente
-router.route('/Gerente/:id?')
-    .get(Gerente.get)
-    .post(Gerente.post)
-    .put(Gerente.put)
-    .delete(Gerente.delete)
-//Administrador
-router.route('/Administrador/:id?')
-    .get(Administrador.get)
-    .post(Administrador.post)
-    .put(Administrador.put)
-    .delete(Administrador.delete)
-//Recepcionista
-router.route('/Recepcionista/:id?')
-    .get(Recepcionista.get)
-    .post(Recepcionista.post)
-    .put(Recepcionista.put)
-    .delete(Recepcionista.delete)
-//Afiliado
-router.route('/Afiliado/:id?')
-    .get(Afiliado.get)
-    .post(Afiliado.post)
-    .put(Afiliado.put)
-    .delete(Afiliado.delete)
-//Medico
-router.route('/Medico/:id?')
-    .get(Medico.get)
-    .post(Medico.post)
-    .put(Medico.put)
-    .delete(Medico.delete)
 //ServicioSalud
 router.route('/ServicioSalud/:id?')
     .get(ServicioSalud.get)

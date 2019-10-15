@@ -1,4 +1,4 @@
-const Medicamento = require('../db_apis/Medicamento.js');
+const MedicamentoReceta = require('../db_apis/Medicamento.js');
  
 async function get(req, res, next) {
   try {
@@ -6,7 +6,7 @@ async function get(req, res, next) {
  
     context.id = parseInt(req.params.id, 10);
  
-    const rows = await Medicamento.find(context);
+    const rows = await MedicamentoReceta.find(context);
  
     if (req.params.id) {
       if (rows.length === 1) {
