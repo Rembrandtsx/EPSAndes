@@ -23,6 +23,37 @@ async function get(req, res, next) {
 }
  
 module.exports.get = get;
-module.exports.post = get;
+
+
+function getServicioOfrecidoFromRec(req) {
+  console.log( req.body);  
+  const servicio = {
+    idIPS: req.body.idIPS,
+    idServicio: req.body.idServicio,
+    horaInicio: req.body.horaInicio,
+    horaFin: req.body.horaFin,
+    capacidad: req.body.capacidad,
+    id: req.body.id
+  };
+ 
+  return servicio;
+}
+ 
+async function post(req, res, next) {
+  try {
+    let servicio = getServicioOfrecidoFromRec(req);
+    
+    servicio = await ServiciosOfrecidos.create(servicio);
+    console.log(servicio);
+    
+    res.status(201).json(servicio);
+  } catch (err) {
+    next(err);
+  }
+}
+ 
+module.exports.post = post;
 module.exports.put = get;
 module.exports.delete = get;
+
+module.exports.getServiciosIPS = get;

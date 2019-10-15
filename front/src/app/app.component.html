@@ -1,6 +1,22 @@
-
-<div *ngFor="let item of epsList">
-  {{item.NOMBRE}}
+<h1>EPS</h1>
+<div class="card-deck">
+<div *ngFor="let item of epsList" class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{item.NOMBRE}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{item.ID}}</h6>
+    <p class="card-text">{{item.LOCALIZACION}}</p>
+  </div>
 </div>
-<a routerLink="/crearUsuario">Crear Usuario</a>
+</div>
+
+
+
+<nav class="nav">
+  <a class="nav-link" routerLink="/crearUsuario">Crear Usuario</a>
+  <a class="nav-link" routerLink="/crearEPS">Crear EPS</a>
+  <a class="nav-link" routerLink="/crearIPS">Crear IPS</a>
+  <a class="nav-link" routerLink="/crearContrata">Crear Contrato EPS-IPS</a>
+  <a class="nav-link" routerLink="/crearServicioPorIps">Crear Servicio Ofrecido por IPS</a>
+</nav>
+
 <router-outlet></router-outlet>

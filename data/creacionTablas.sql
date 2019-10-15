@@ -44,6 +44,19 @@ CREATE TABLE ServiciosSalud
   id int NOT NULL PRIMARY KEY
 
 );
+CREATE TABLE Cita
+(
+  idAfiliado varchar(255) NOT NULL,
+  idMedico varchar(255) NOT NULL,
+  ServicioAsociado int,
+  Fecha varchar(255) NOT NULL,
+  id int PRIMARY KEY,
+  ingreso NUMBER(1) DEFAULT 0,
+  CONSTRAINT Afiliado_CITA_FK FOREIGN KEY (idAfiliado) REFERENCES Usuario(userName),
+  CONSTRAINT Medico_CITA_FK FOREIGN KEY (idMedico) REFERENCES Usuario(userName),
+  CONSTRAINT Servicio_CITA_FK FOREIGN KEY (ServicioAsociado) REFERENCES ServiciosSalud(id)
+
+);
 
 CREATE TABLE  EpsServicios
 (
@@ -58,10 +71,11 @@ CREATE TABLE  EpsServicios
 CREATE TABLE ServiciosOfrecidos
 (
   idIPS int,
-  idServicio int PRIMARY KEY ,
+  idServicio int,
   horaInicio varchar(255) NOT NULL,
   horaFin varchar(255) NOT NULL,
-  Capacidad int NOT NULL,
+  capacidad int NOT NULL,
+  id int PRIMARY KEY,
   CONSTRAINT Usuario_SERVICIOSOFRECIDOS_FK FOREIGN KEY (idServicio) REFERENCES ServiciosSalud(id),
   CONSTRAINT IPS_SERVICIOSOFRECIDOS_FK FOREIGN KEY (idIPS) REFERENCES IPS(id)
 
@@ -124,16 +138,7 @@ CREATE TABLE Hozpitalizado
 
 );
 
-CREATE TABLE Cita
-(
-  userNameAfiliado varchar(255) NOT NULL,
-  userNameMedico varchar(255) NOT NULL,
-  ServicioAsociado int,
-  id int PRIMARY KEY,
-  CONSTRAINT Afiliado_CITA_FK FOREIGN KEY (userNameAfiliado) REFERENCES Afiliado(userName),
-  CONSTRAINT Medico_CITA_FK FOREIGN KEY (userNameMedico) REFERENCES Medico(userName)
 
-);
 
 CREATE TABLE Control
 (

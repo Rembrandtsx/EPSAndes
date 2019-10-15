@@ -1,0 +1,57 @@
+<h1>Crear Servicio Ofrecido por una IPS</h1>
+<form (ngSubmit)="crearServicioOfrecido()" #contrataForm="ngForm">
+  <div class="form-group">
+    <label for="power">IPS Ofertante</label>
+    <select class="form-control" id="ips"
+            required
+            [(ngModel)]="servicioOfrecido.idIPS" name="ips"
+            #power="ngModel">
+      <option *ngFor="let ips of ipss" [value]="ips.ID">{{ips.NOMBRE}}</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="power">Servicio Ofrecido</label>
+    <select class="form-control" id="servicio"
+            required
+            [(ngModel)]="servicioOfrecido.idServicio" name="servicio"
+            #power="ngModel">
+      <option *ngFor="let servicito of servicios" [value]="servicito.ID">{{servicito.NOMBRE}}</option>
+    </select>
+
+  </div>
+  <div class="form-group">
+    <label for="power">Hora Incial</label>
+    <select class="form-control" id="horaInicio"
+            required
+            [(ngModel)]="servicioOfrecido.horaInicio" name="horaInicio"
+            #power="ngModel">
+      <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
+    </select>
+
+  </div>
+  <div class="form-group">
+    <label for="power">Hora Final</label>
+    <select class="form-control" id="horaFin"
+            required
+            [(ngModel)]="servicioOfrecido.horaFin" name="horaFin"
+            #power="ngModel">
+      <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+    <label for="name">Capacidad</label>
+    <input type="text" class="form-control" id="capacidad"
+           required
+           [(ngModel)]="servicioOfrecido.capacidad" name="capacidad"
+           #name="ngModel">
+
+  </div>
+
+
+  <button type="submit" class="btn btn-success" [disabled]="!contrataForm.form.valid ">Crear</button>
+
+</form>

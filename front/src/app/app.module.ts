@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EpsCreateComponent } from './eps-create/eps-create.component';
 import { IpsCreateComponent } from './ips-create/ips-create.component';
 import { ContrataComponent } from './contrata/contrata.component';
+import { CrearServicioOfrecidoComponent } from './crear-servicio-ofrecido/crear-servicio-ofrecido.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ContrataComponent } from './contrata/contrata.component';
     UsuarioCreateComponent,
     EpsCreateComponent,
     IpsCreateComponent,
-    ContrataComponent
+    ContrataComponent,
+    CrearServicioOfrecidoComponent
   ],
   imports: [
     BrowserModule,

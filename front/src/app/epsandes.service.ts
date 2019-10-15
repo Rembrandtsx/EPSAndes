@@ -51,5 +51,27 @@ export class EPSAndesService {
     return this.http.post('http://localhost:3000/api/Usuario', usuario);
   }
 
+  //ServiciosSalud
+  getAllServiciosSalud():Observable<any>{
+    return this.http.get('http://localhost:3000/api/ServicioSalud');
+  }
+  getServicioSalud(userName:string):Observable<any>{
+    return this.http.get('http://localhost:3000/api/ServicioSalud/'+ userName);
+  }
+  postServicioSalud(usuario:any){
+    return this.http.post('http://localhost:3000/api/ServicioSalud', usuario);
+  }
+
+
+  //ServiciosOfrecidos
+  getAllServiciosOfrecidos():Observable<any>{
+    return this.http.get('http://localhost:3000/api/ServiciosOfrecidos');
+  }
+  getServicioOfrecido(userName:string):Observable<any>{
+    return this.http.get('http://localhost:3000/api/ServiciosOfrecidos/'+ userName);
+  }
+  postServiciosOfrecidos(usuario:any){
+    return this.http.post('http://localhost:3000/api/ServiciosOfrecidos', usuario);
+  }
 
 }

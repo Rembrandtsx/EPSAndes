@@ -4,6 +4,7 @@ import { UsuarioCreateComponent } from './usuario-create/usuario-create.componen
 import { EpsCreateComponent } from './eps-create/eps-create.component';
 import { IpsCreateComponent } from './ips-create/ips-create.component';
 import { ContrataComponent } from './contrata/contrata.component';
+import { CrearServicioOfrecidoComponent } from './crear-servicio-ofrecido/crear-servicio-ofrecido.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path:'crearContrata',
     component: ContrataComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'crearServicioPorIps',
+    component: CrearServicioOfrecidoComponent,
     pathMatch:'full'
   }
 ];
