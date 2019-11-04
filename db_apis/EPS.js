@@ -51,6 +51,25 @@ async function create(emp) {
 module.exports.create = create;
 
 
+async function createAsync(emp) {
+  try{
+  const eps = Object.assign({}, emp);
+  if (!eps.id){
+    //si el objeto no tiene ID Asociado saca el siguiente valor de la secuencia de SQL para asignarlo.
+    const genIdRes = await database.simpleExecute("SELECT sq_EpsAndes.NEXTVAL FROM dual", {});
+    eps.id = genIdRes.rows[0].NEXTVAL;
+  }  
+  const resultado = await database.execute(createSQL, eps);
+  database.commit(resultado.conn);  
+  return eps;
+  }catch(e){
+    console.log(e);
+  }
+ 
+}
+ 
+module.exports.createAsync = createAsync;
+
 const updateSql =
  `UPDATE EPS
   SET nombre = :nombre, localizacion = :localizacion WHERE id = :id`;

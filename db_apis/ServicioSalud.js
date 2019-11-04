@@ -27,11 +27,17 @@ const createSQL =
  `insert into ServiciosSalud (
     id,
     nombre,
-    tipo
+    tipo,
+    estado,
+    horaIni,
+    horaFin
   ) values (
     :id,
     :nombre,
-    :tipo
+    :tipo,
+    :estado,
+    :horaIni,
+    :horaFin
   )`;
 
 async function create(emp) {
@@ -47,3 +53,27 @@ async function create(emp) {
 }
  
 module.exports.create = create;
+
+
+
+const updateSql =
+ `UPDATE ServiciosSalud
+  SET nombre = :nombre, 
+  tipo = :tipo,
+    estado = :estado,
+    horaIni = :horaIni,
+    horaFin = :horaFin
+  WHERE id = :id`;
+ 
+async function update(emp) {
+  const eps = Object.assign({}, emp);
+  const result = await database.simpleExecute(updateSql, eps);
+ 
+  if (result.rowsAffected && result.rowsAffected === 1) {
+    return eps;
+  } else {
+    return null;
+  }
+}
+ 
+module.exports.update = update;

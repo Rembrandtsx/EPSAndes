@@ -1,0 +1,65 @@
+<h1>Reservar una Cita</h1>
+<form (ngSubmit)="crearServicioSalud()" #contrataForm="ngForm">
+
+    <div class="form-group">
+        <label for="name">Fecha</label>
+        <input type="text" class="form-control" id="fecha"
+               required
+               [(ngModel)]="this.cita.fecha" name="fecha"
+               #horaIni="ngModel">
+    
+      </div>
+    <div class="form-group">
+        <label for="name">hora Inicio</label>
+        <input type="text" class="form-control" id="horaIni"
+               required
+               [(ngModel)]="this.cita.horaIni" name="horaIni"
+               #horaIni="ngModel">
+    
+      </div>
+      <div class="form-group">
+          <label for="name">hora Fin</label>
+          <input type="text" class="form-control" id="horaFin"
+                 required
+                 [(ngModel)]="this.cita.horaFin" name="horaFin"
+                 #horaFin="ngModel">
+      
+        </div>
+        <div class="form-group">
+            <label for="power">Servicio a Solicitar</label>
+            <select class="form-control" id="servicio"
+                    required
+                    [(ngModel)]="this.cita.idServicio" name="servicio"
+                    #power="ngModel">
+                    <ng-container  *ngFor="let servicio of Servicios">
+                        <option [value]="servicio.ID">{{servicio.NOMBRE}}</option>
+                    </ng-container>
+            </select>
+          </div>
+          <div class="form-group">
+              <label for="power">Medico a Solicitar</label>
+              <select class="form-control" id="medico"
+                      required
+                      [(ngModel)]="this.cita.idMedico" name="medico"
+                      #power="ngModel">
+                      <ng-container  *ngFor="let medico of Usuarios">
+                          <option *ngIf="medico.TIPO == 'medico'" [value]="medico.USERNAME">{{medico.NOMBRE}}</option>
+                      </ng-container>
+              </select>
+            </div>
+
+            <div class="form-group">
+                <label for="power">Si tiene, Seleccione la campaña por la que viene</label>
+                <select class="form-control" id="campana"
+                        [(ngModel)]="this.cita.idOrganizador" name="campana"
+                        #power="ngModel">
+                        <ng-container  *ngFor="let organizador of Usuarios">
+                            <option *ngIf="organizador.TIPO == 'organizadorcampaña'" [value]="organizador.USERNAME">{{organizador.NOMBRE}}</option>
+                        </ng-container>
+                </select>
+              </div>
+
+
+  <button type="submit" class="btn btn-success" [disabled]="!contrataForm.form.valid ">Crear</button>
+
+</form>

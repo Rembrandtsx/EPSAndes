@@ -1,13 +1,6 @@
 CREATE SEQUENCE EPSANDES_SEQUENCE;
 
-CREATE TABLE EPS
-(
-    id int NOT NULL PRIMARY KEY,
-    nombre varchar(255) NOT NULL,
-    localizacion varchar(255) NOT NULL,
-    idGerente varchar(255) NOT NULL,
-    CONSTRAINT EPS_Gerente FOREIGN KEY (idGerente) REFERENCES Usuario(userName)
-);
+
 
 CREATE TABLE IPS
 (
@@ -16,6 +9,28 @@ CREATE TABLE IPS
   localizacion varchar(255) NOT NULL
 );
 
+
+
+CREATE TABLE Usuario
+(
+  userName varchar(255) NOT NULL PRIMARY KEY,
+  nombre varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  tipo varchar(255) NOT NULL
+  
+);
+ALTER TABLE Usuario
+ADD CONSTRAINT check_user_type CHECK (tipo IN ('medico', 'recepcionista', 'afiliado', 'administrador','gerente', 'organizadorcampaña'))
+
+
+CREATE TABLE EPS
+(
+    id int NOT NULL PRIMARY KEY,
+    nombre varchar(255) NOT NULL,
+    localizacion varchar(255) NOT NULL,
+    idGerente varchar(255) NOT NULL,
+    CONSTRAINT EPS_Gerente FOREIGN KEY (idGerente) REFERENCES Usuario(userName)
+);
 CREATE TABLE Contrata
 (
   idEPS int NOT NULL,
@@ -25,38 +40,37 @@ CREATE TABLE Contrata
   CONSTRAINT EPS_CONTRATA_FK  FOREIGN KEY (idIPS) REFERENCES IPS(id)
 );
 
-CREATE TABLE Usuario
-(
-  userName varchar(255) NOT NULL PRIMARY KEY,
-  nombre varchar(255) NOT NULL,
-  password varchar(255) NOT NULL,
-  tipo varchar(255) NOT NULL CHECK('medico', 'recepcionista', 'afiliado', 'administrador','gerente')
-  
-);
-ALTER TABLE Usuario
-ADD CONSTRAINT check_user_type
-  CHECK (tipo IN ('medico', 'recepcionista', 'afiliado', 'administrador','gerente'))
 
 CREATE TABLE ServiciosSalud
 (
   nombre varchar(255) NOT NULL ,
   tipo varchar(255) NOT NULL ,
-  id int NOT NULL PRIMARY KEY
-
+  horaIni number(5) NOT NULL,
+  horaFin number(5) NOT NULL,
+  id int NOT NULL PRIMARY KEY,
+  estado varchar(255) NOT NULL
 );
+alter table ServiciosSalud 
+add constraint CK_mantenimiento CHECK(estado in('mantenimiento', 'disponible'));
+
 CREATE TABLE Cita
 (
   idAfiliado varchar(255) NOT NULL,
-  idMedico varchar(255) NOT NULL,
-  ServicioAsociado int,
-  Fecha varchar(255) NOT NULL,
+  fechaSolicitud varchar(255) ,
+  fecha varchar(255) NOT NULL,
   id int PRIMARY KEY,
   ingreso NUMBER(1) DEFAULT 0,
-  CONSTRAINT Afiliado_CITA_FK FOREIGN KEY (idAfiliado) REFERENCES Usuario(userName),
+  idMedico varchar(255) NOT NULL,
+  idServicio int NOT NULL,
+  horaIni number(5),
+  horaFin number(5),
+  idOrganizador varchar(255),
   CONSTRAINT Medico_CITA_FK FOREIGN KEY (idMedico) REFERENCES Usuario(userName),
-  CONSTRAINT Servicio_CITA_FK FOREIGN KEY (ServicioAsociado) REFERENCES ServiciosSalud(id)
-
+  CONSTRAINT Organizador_Cita_FK FOREIGN KEY (idOrganizador) REFERENCES Usuario(userName),
+  CONSTRAINT Servicio_FK FOREIGN KEY (idServicio) REFERENCES ServiciosSalud(id),
+  CONSTRAINT Afiliado_CITA_FK FOREIGN KEY (idAfiliado) REFERENCES Usuario(userName)
 );
+
 
 CREATE TABLE  EpsServicios
 (
@@ -72,12 +86,11 @@ CREATE TABLE ServiciosOfrecidos
 (
   idIPS int,
   idServicio int,
-  horaInicio varchar(255) NOT NULL,
-  horaFin varchar(255) NOT NULL,
   capacidad int NOT NULL,
   id int PRIMARY KEY,
   CONSTRAINT Usuario_SERVICIOSOFRECIDOS_FK FOREIGN KEY (idServicio) REFERENCES ServiciosSalud(id),
-  CONSTRAINT IPS_SERVICIOSOFRECIDOS_FK FOREIGN KEY (idIPS) REFERENCES IPS(id)
+  CONSTRAINT IPS_SERVICIOSOFRECIDOS_FK FOREIGN KEY (idIPS) REFERENCES IPS(id),
+  constraint CK_libros_precio_positivo check (capacidad>=0 )
 
 );
 
@@ -190,6 +203,24 @@ CREATE TABLE MedicamentoReceta
   CONSTRAINT Medicamento_MR_FK FOREIGN KEY (idMedicamento) REFERENCES Medicamento(idMedicamento),
   CONSTRAINT Reseta_MR_FK FOREIGN KEY (idReceta) REFERENCES Recetas(id)
 );
-
+DROP TABLE EPS CASCADE CONSTRAINTS;
+DROP TABLE IPS CASCADE CONSTRAINTS;
+DROP TABLE Contrata CASCADE CONSTRAINTS;
+DROP TABLE Usuario CASCADE CONSTRAINTS;
+DROP TABLE ServiciosSalud CASCADE CONSTRAINTS;
+DROP TABLE Cita CASCADE CONSTRAINTS;
+DROP TABLE EpsServicios CASCADE CONSTRAINTS;
+DROP TABLE ServiciosOfrecidos CASCADE CONSTRAINTS;
+DROP TABLE Consulta CASCADE CONSTRAINTS;
+DROP TABLE Terapias CASCADE CONSTRAINTS;
+DROP TABLE ConsultaUrgencias CASCADE CONSTRAINTS;
+DROP TABLE ExamenDiagnostico CASCADE CONSTRAINTS;
+DROP TABLE ProcedimientoEspecializado CASCADE CONSTRAINTS;
+DROP TABLE Hozpitalizado CASCADE CONSTRAINTS;
+DROP TABLE Control CASCADE CONSTRAINTS;
+DROP TABLE Orden CASCADE CONSTRAINTS;
+DROP TABLE Recetas CASCADE CONSTRAINTS;
+DROP TABLE Medicamento CASCADE CONSTRAINTS;
+DROP TABLE MedicamentoReceta CASCADE CONSTRAINTS;
 
 

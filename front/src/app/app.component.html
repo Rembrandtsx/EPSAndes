@@ -1,6 +1,29 @@
-<h1>EPS</h1>
+<div *ngIf="this.epsService.usuario.tipo != 'visitante'">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="display: flex; justify-content: space-between; color: #fff;">
+      <div class="nav-links" style="width: 80%; display:flex; justify-content: space-evenly;">
+          <a class="nav-link" routerLink="/crearUsuario" *ngIf="this.epsService.usuario.tipo != 'visitante'" >Crear Usuario</a>
+          <a class="nav-link" routerLink="/crearEPS" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'administrador'">Crear EPS</a>
+          <a class="nav-link" routerLink="/crearIPS" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'administrador'">Crear IPS</a>
+          <a class="nav-link" routerLink="/crearContrata" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'gerente' || this.epsService.usuario.tipo.toLowerCase() == 'administrador'">Crear Contrato EPS-IPS</a>
+          <a class="nav-link" routerLink="/crearServicioPorIps" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'gerente' || this.epsService.usuario.tipo.toLowerCase() == 'administrador'">Crear Servicio Ofrecido por IPS</a>
+          <a class="nav-link" routerLink="/crearServicio" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'gerente' || this.epsService.usuario.tipo.toLowerCase() == 'administrador'" >Crear Servicio</a>
+          <a class="nav-link" routerLink="/reservarCita" >Reservar una Cita</a>
+          <a class="nav-link" routerLink="/reservarCitaCamp" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'organizadorcampaña'">Crear un Campaña</a>
+          <a class="nav-link" routerLink="/registrarMantenimiento" *ngIf="this.epsService.usuario.tipo.toLowerCase() == 'gerente' || this.epsService.usuario.tipo.toLowerCase() == 'administrador'|| this.epsService.usuario.tipo.toLowerCase() == 'recepcionista'">Registrar un Mantenimiento</a>
+
+        </div>
+        
+      
+        <div class="userInfo">
+            <img [src]="this.epsService.usuario.urlImage" width="40" height="40" class="rounded-circle" style="float:right">
+            {{this.epsService.usuario.nombre }} - {{this.epsService.usuario.userName}}
+        </div>
+        
+      </nav>
+  <h1>EPS</h1>
 <div class="card-deck">
-<div *ngFor="let item of epsList" class="card" style="width: 18rem;">
+<div *ngFor="let item of epsList" class="card" style="max-width: 18rem;">
+  <img src="https://source.unsplash.com/900x600/?building" alt="Eps" style="max-width: 18rem; height: auto;" >
   <div class="card-body">
     <h5 class="card-title">{{item.NOMBRE}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{item.ID}}</h6>
@@ -9,14 +32,9 @@
 </div>
 </div>
 
-
-
+</div>
 <nav class="nav">
-  <a class="nav-link" routerLink="/crearUsuario">Crear Usuario</a>
-  <a class="nav-link" routerLink="/crearEPS">Crear EPS</a>
-  <a class="nav-link" routerLink="/crearIPS">Crear IPS</a>
-  <a class="nav-link" routerLink="/crearContrata">Crear Contrato EPS-IPS</a>
-  <a class="nav-link" routerLink="/crearServicioPorIps">Crear Servicio Ofrecido por IPS</a>
+  <a class="nav-link" routerLink="/crearUsuario" *ngIf="this.epsService.usuario.tipo == 'visitante'">Registrarse</a>
 </nav>
-
-<router-outlet></router-outlet>
+<app-login *ngIf="this.epsService.usuario.tipo == 'visitante'"></app-login>
+<router-outlet ></router-outlet>

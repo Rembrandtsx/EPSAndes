@@ -21,26 +21,6 @@
     </select>
 
   </div>
-  <div class="form-group">
-    <label for="power">Hora Incial</label>
-    <select class="form-control" id="horaInicio"
-            required
-            [(ngModel)]="servicioOfrecido.horaInicio" name="horaInicio"
-            #power="ngModel">
-      <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
-    </select>
-
-  </div>
-  <div class="form-group">
-    <label for="power">Hora Final</label>
-    <select class="form-control" id="horaFin"
-            required
-            [(ngModel)]="servicioOfrecido.horaFin" name="horaFin"
-            #power="ngModel">
-      <option *ngFor="let hora of horarios" [value]="hora">{{hora}}</option>
-    </select>
-
-  </div>
 
   <div class="form-group">
     <label for="name">Capacidad</label>

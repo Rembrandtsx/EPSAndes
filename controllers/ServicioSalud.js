@@ -29,7 +29,10 @@ function getServicioSaludFromRec(req) {
   const servicio = {
     id: req.body.id,
     nombre: req.body.nombre,
-    tipo: req.body.tipo
+    tipo: req.body.tipo,
+    estado: req.body.estado,
+    horaIni: req.body.horaIni,
+    horaFin: req.body.horaFin
   };
  
   return servicio;
@@ -49,5 +52,25 @@ async function post(req, res, next) {
 }
  
 module.exports.post = post;
-module.exports.put = get;
+
+async function put(req, res, next) {
+  try {
+    let eps = getServicioSaludFromRec(req);
+ 
+    eps.id = parseInt(req.params.id, 10);
+ 
+    eps = await ServicioSalud.update(eps);
+ 
+    if (eps !== null) {
+      res.status(200).json(eps);
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+ 
+module.exports.put = put;
+
 module.exports.delete = get;

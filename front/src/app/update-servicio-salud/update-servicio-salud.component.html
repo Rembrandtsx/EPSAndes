@@ -1,0 +1,30 @@
+<h1>Registrar un Mantenimiento</h1>
+<form (ngSubmit)="crearServicioOfrecido()" #contrataForm="ngForm">
+
+
+  <div class="form-group">
+    <label for="power">Servicio a Modificar</label>
+    <select class="form-control" id="servicio"
+            required
+            [(ngModel)]="this.idServicio" name="servicio"
+            #power="ngModel">
+      <option *ngFor="let servicito of servicios" [value]="servicito.ID">{{servicito.NOMBRE}} - {{servicito.TIPO}}</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+      <label for="power">Estado</label>
+      <select class="form-control" id="ips"
+              required
+              [(ngModel)]="this.estado" name="ips"
+              #power="ngModel">
+        <option *ngFor="let estado of estados" [value]="estado">{{estado}}</option>
+      </select>
+  
+    </div>
+
+
+  <button type="submit" class="btn btn-success" [disabled]="!contrataForm.form.valid ">Crear</button>
+
+</form>

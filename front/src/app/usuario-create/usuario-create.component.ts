@@ -14,7 +14,7 @@ export class UsuarioCreateComponent implements OnInit {
     password:'',
     tipo:''
   };
-  tipos = ['recepcionista','administrador','afiliado','medico','gerente'];
+  tipos = ['recepcionista','administrador','afiliado','medico','gerente','organizadorcampaña'];
   constructor( private epsService: EPSAndesService, private toastr: ToastrService) { }
 
   ngOnInit() {

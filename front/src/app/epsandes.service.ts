@@ -5,10 +5,21 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class EPSAndesService {
 
-  constructor(private http: HttpClient) { }
+  public usuario= {
+    tipo :"visitante",
+    userName:"",
+    nombre:"",
+    urlImage:"https://i.pravatar.cc/300"
+  }
+
+  constructor(private http: HttpClient) {
+
+   }
 
 
-
+  login(userName:string,password:string):Observable<any>{
+    return this.http.get('http://localhost:3000/api/usuario/'+userName);
+  }
   //EPS
   getAllEps():Observable<any>{
     return this.http.get('http://localhost:3000/api/eps');
@@ -61,6 +72,9 @@ export class EPSAndesService {
   postServicioSalud(usuario:any){
     return this.http.post('http://localhost:3000/api/ServicioSalud', usuario);
   }
+  putServiciosSalud(servicio:any){
+    return this.http.put('http://localhost:3000/api/ServicioSalud/'+servicio.id, servicio)
+  }
 
 
   //ServiciosOfrecidos
@@ -74,4 +88,21 @@ export class EPSAndesService {
     return this.http.post('http://localhost:3000/api/ServiciosOfrecidos', usuario);
   }
 
+    //Cita
+    getAllCitas():Observable<any>{
+      return this.http.get('http://localhost:3000/api/Cita');
+    }
+    getCita(userName:string):Observable<any>{
+      return this.http.get('http://localhost:3000/api/Cita/'+ userName);
+    }
+    postCitas(usuario:any){
+      return this.http.post('http://localhost:3000/api/Cita', usuario);
+    }
+    putCitas(cita:any):Observable<any>{
+      return this.http.put('http://localhost:3000/api/Cita/'+cita.id, cita);
+    }
+
+    getCitaCamp(idOrganizador:any){
+      return this.http.get('http://localhost:3000/api/utils/getCitaCamp/'+ idOrganizador);
+    }
 }

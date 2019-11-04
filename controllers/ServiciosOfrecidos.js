@@ -30,10 +30,8 @@ function getServicioOfrecidoFromRec(req) {
   const servicio = {
     idIPS: req.body.idIPS,
     idServicio: req.body.idServicio,
-    horaInicio: req.body.horaInicio,
-    horaFin: req.body.horaFin,
     capacidad: req.body.capacidad,
-    id: req.body.id
+    id: req.body.id,
   };
  
   return servicio;
@@ -53,7 +51,25 @@ async function post(req, res, next) {
 }
  
 module.exports.post = post;
-module.exports.put = get;
-module.exports.delete = get;
 
-module.exports.getServiciosIPS = get;
+async function put(req, res, next) {
+  try {
+    let eps = getServicioOfrecidoFromRec(req);
+ 
+    eps.id = parseInt(req.params.id, 10);
+ 
+    eps = await ServiciosOfrecidos.update(eps);
+ 
+    if (eps !== null) {
+      res.status(200).json(eps);
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+ 
+module.exports.put = put;
+
+module.exports.delete = get;

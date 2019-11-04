@@ -26,15 +26,11 @@ const createSQL =
  `insert into ServiciosOfrecidos (
     idIPS,
     idServicio,
-    horaInicio,
-    horaFin,
     capacidad,
     id
   ) values (
     :idIPS,
     :idServicio,
-    :horaInicio,
-    :horaFin,
     :capacidad,
     :id
   )`;

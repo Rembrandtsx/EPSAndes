@@ -1,0 +1,52 @@
+<h1>Crear Servicio Salud</h1>
+<form (ngSubmit)="crearServicioSalud()" #contrataForm="ngForm">
+
+
+
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control" id="nombre"
+           required
+           [(ngModel)]="servicioSalud.nombre" name="nombre"
+           #nombre="ngModel">
+
+  </div>
+  <div class="form-group">
+      <label for="name">Tipo</label>
+      <input type="text" class="form-control" id="tipo"
+             required
+             [(ngModel)]="servicioSalud.tipo" name="tipo"
+             #tipo="ngModel">
+  
+    </div>
+
+    <div class="form-group">
+        <label for="name">hora Inicio</label>
+        <input type="text" class="form-control" id="horaIni"
+               required
+               [(ngModel)]="servicioSalud.horaIni" name="horaIni"
+               #horaIni="ngModel">
+    
+      </div>
+      <div class="form-group">
+          <label for="name">hora Fin</label>
+          <input type="text" class="form-control" id="horaFin"
+                 required
+                 [(ngModel)]="servicioSalud.horaFin" name="horaFin"
+                 #horaFin="ngModel">
+      
+        </div>
+        <div class="form-group">
+            <label for="servicio">Estado inicial</label>
+            <select class="form-control" id="servicio"
+                    required
+                    [(ngModel)]="servicioSalud.estado" name="servicio"
+                    #servicio="ngModel">
+              <option value="disponible">Disponible</option>
+              <option value="mantenimiento">Mantenimiento</option>
+            </select>
+        </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!contrataForm.form.valid ">Crear</button>
+
+</form>

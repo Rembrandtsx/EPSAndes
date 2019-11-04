@@ -9,7 +9,7 @@ import { EPSAndesService } from './epsandes.service';
 export class AppComponent {
   title = 'front';
   epsList = [];
-  constructor(private epsService: EPSAndesService){
+  constructor(public epsService: EPSAndesService){
     this.epsService.getAllEps().subscribe(result=>{
       console.log(result);      
       this.epsList = result;

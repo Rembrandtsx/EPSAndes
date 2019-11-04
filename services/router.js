@@ -35,6 +35,8 @@ const utilities = require('../controllers/utils.js');
  router.route('/utils')
     .get(utilities.get)
     .post(utilities.post);
+ router.route('/utils/getCitaCamp/:id')
+    .get(utilities.getCitaCamp)
 
 //EPS
 router.route('/EPS/:id?')
