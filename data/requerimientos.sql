@@ -30,7 +30,7 @@ SELECT count(*) as Cantidad, cita.fechaSolicitud
 FROM CITA cita, ServiciosSalud serv 
 WHERE serv.id = '1' AND cita.idServicio = serv.id
 Group By cita.fechaSolicitud, cita.fechaSolicitud
-Order BY count(cita.fechaSolicitud) DESC;
+Order BY count(cita.fechaSolicitud) ASC;
     /*Fecha Mas a menos actividad*/
 SELECT count(*) as Cantidad, cita.fechaSolicitud
 FROM CITA cita, ServiciosSalud serv 
